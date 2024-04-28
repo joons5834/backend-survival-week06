@@ -11,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
-public class PostControllers {
+public class PostController {
     private final PostService postService;
 
-    public PostControllers(PostService postService) {
+    public PostController(PostService postService) {
         this.postService = postService;
     }
 
