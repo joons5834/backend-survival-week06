@@ -1,9 +1,9 @@
 # 아래에 데이터베이스를 세팅해주세요. (포트 번호에 주의해주세요)
 spring:
   datasource:
-    url: URL
-    username: USERNAME
-    password: PASSWORD
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
 server:
   servlet:
     encoding:
