@@ -22,15 +22,13 @@ public class JdbcPostDao implements PostDao {
         String sql = "SELECT id, title, author, content from posts;";
         List<Post> allPosts = new ArrayList<>();
         jdbcTemplate.query(sql, resultSet -> {
-            while (resultSet.next()) {
-                PostId postId = PostId.of(resultSet.getString("id"));
-                String title = resultSet.getString("title");
-                String author = resultSet.getString("author");
-                String content = resultSet.getString("content");
+            PostId postId = PostId.of(resultSet.getString("id"));
+            String title = resultSet.getString("title");
+            String author = resultSet.getString("author");
+            String content = resultSet.getString("content");
 
-                Post post = new Post(postId, title, author, content);
-                allPosts.add(post);
-            }
+            Post post = new Post(postId, title, author, content);
+            allPosts.add(post);
         });
         return allPosts;
     }
@@ -38,17 +36,15 @@ public class JdbcPostDao implements PostDao {
     @Override
     public Post find(PostId id) {
         String sql = "SELECT id, title, author, content FROM posts" +
-                "WHERE id = ? ;";
+                " WHERE id = ? ;";
         List<Post> postFound = new ArrayList<>();
         jdbcTemplate.query(sql, resultSet -> {
-            while (resultSet.next()) {
-                PostId postId = PostId.of(resultSet.getString("id"));
-                String title = resultSet.getString("title");
-                String author = resultSet.getString("author");
-                String content = resultSet.getString("content");
+            PostId postId = PostId.of(resultSet.getString("id"));
+            String title = resultSet.getString("title");
+            String author = resultSet.getString("author");
+            String content = resultSet.getString("content");
 
-                postFound.add(new Post(postId, title, author, content));
-            }
+            postFound.add(new Post(postId, title, author, content));
         }, id.toString());
 
         if (postFound.isEmpty()) {
@@ -72,10 +68,10 @@ public class JdbcPostDao implements PostDao {
     @Override
     public boolean update(Post post) {
         String sql = "UPDATE posts SET title = ?, content = ? " +
-                "WEHRE id = ?;";
+                "WHERE id = ?;";
 
         int numUpdated = jdbcTemplate.update(sql, post.title(),
-                post.content(), post.id());
+                post.content(), post.id().toString());
 
         return numUpdated != 0;
     }
@@ -84,7 +80,7 @@ public class JdbcPostDao implements PostDao {
     public boolean delete(PostId id) {
         String sql = "DELETE FROM posts WHERE id = ?;";
 
-        int numDeleted = jdbcTemplate.update(sql, id);
+        int numDeleted = jdbcTemplate.update(sql, id.toString());
 
         return numDeleted != 0;
 

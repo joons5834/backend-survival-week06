@@ -8,6 +8,9 @@ public class PostDto {
     private String author;
     private String content;
 
+    public PostDto() {
+    }
+
     public PostDto(Post post) {
         this.id = post.id().toString();
         this.title = post.title();
@@ -33,5 +36,17 @@ public class PostDto {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
